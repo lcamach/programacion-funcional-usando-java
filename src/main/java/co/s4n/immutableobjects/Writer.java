@@ -39,7 +39,7 @@ public final class Writer {
         List<Book> updatedBooks = new ArrayList<>();
         if (books.contains(book)) {
             for (Book b : books) {
-                if (b.getTitle().equals(book.getTitle())) {
+                if (b.equals(book)) {
                     updatedBooks.add(b.changePrice(newPrice));
                 } else {
                     updatedBooks.add(b);

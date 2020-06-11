@@ -82,4 +82,19 @@ public class WriterTest {
 
         assertEquals(70000d, joshuaWithUpdatedBooks.getBooks().get(0).getPrice(), 0d);
     }
+
+    @Test
+    public void changeBookPriceRefactorInTheImmutableWay() throws Exception {
+        String firstName = "Joshua";
+        String lastName = "Backfield";
+        Book book1 = new Book("Becoming Functional", 100000d);
+        List<Book> books = Arrays.asList(book1);
+        Writer joshua = new Writer(firstName, lastName, books);
+
+        Book book = joshua.getBooks().get(0);
+        Writer joshuaWithUpdatedBooks = joshua.changeBookPriceRefactor(book, 70000d);
+
+        assertEquals(100000d, joshua.getBooks().get(0).getPrice(), 0d);
+        assertEquals(70000d, joshuaWithUpdatedBooks.getBooks().get(0).getPrice(), 0d);
+    }
 }

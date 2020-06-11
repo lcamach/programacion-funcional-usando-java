@@ -3,6 +3,7 @@ package co.s4n.immutableobjects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class Writer {
 
@@ -49,5 +50,16 @@ public final class Writer {
         } else {
             throw new Exception(String.format("Book %s does not exist for the writer %s", book.getTitle(), firstName));
         }
+    }
+
+    public Writer changeBookPriceRefactor(Book book, Double newPrice) throws Exception {
+        if (getBooks().contains(book)) return new Writer(firstName, lastName, updateBooks(book, newPrice));
+        else throw new Exception(String.format("Book %s does not exist for the writer %s",
+                book.getTitle(), firstName));
+    }
+
+    private List<Book> updateBooks(Book book, Double newPrice) {
+        return getBooks().stream().map(b -> b.equals(book) ? b.changePrice(newPrice) : b)
+                .collect(Collectors.toList());
     }
 }

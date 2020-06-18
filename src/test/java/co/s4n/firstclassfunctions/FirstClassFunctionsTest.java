@@ -32,6 +32,18 @@ public class FirstClassFunctionsTest {
     }
 
     @Test
+    public void composeAndComposeTest() {
+        Function<Integer, Integer> multiplyBy2 = i -> i * 2;
+        Function<Integer, Integer> divideBy2 = i -> i / 2;
+
+        Function<Integer, Integer> multiplyAndDivide = divideBy2.compose(multiplyBy2);
+        Function<Integer, Integer> divideAndMultiply = multiplyBy2.compose(divideBy2);
+
+        assertEquals(Integer.valueOf(5), multiplyAndDivide.apply(5));
+        assertEquals(Integer.valueOf(4), divideAndMultiply.apply(5));
+    }
+
+    @Test
     public void andThenAndComposeTest() {
         Function<Integer, Integer> multiplyBy2 = i -> i * 2;
         Function<Integer, String> convertToString = Object::toString;
